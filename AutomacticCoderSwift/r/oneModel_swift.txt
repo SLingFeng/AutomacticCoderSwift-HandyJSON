@@ -1,0 +1,9 @@
+
+class #name#: HandyJSON {
+    
+    #property# 
+
+    required init() {
+
+    }
+}

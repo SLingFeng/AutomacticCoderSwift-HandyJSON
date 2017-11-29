@@ -1,0 +1,16 @@
+//
+//  Created File to #time#
+//
+//
+//  Created by 孙凌锋   https://github.com/SLingFeng
+//  Copyright © 2017年 孙凌锋. All rights reserved.
+//  Reference
+//      Automatic Coder https://github.com/zhangxigithub/AutomaticCoder
+//      AutomaticCoder(修改版) https://github.com/yinxianwei/AutomaticCoder-
+//
+//  Created by 孙凌锋 on 2017/11/24.
+
+
+import UIKit
+import HandyJSON
+

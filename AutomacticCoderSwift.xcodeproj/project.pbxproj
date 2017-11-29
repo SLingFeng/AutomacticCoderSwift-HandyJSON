@@ -11,6 +11,8 @@
 		AF8990FC1FC80C9E00639560 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8990FB1FC80C9E00639560 /* ViewController.swift */; };
 		AF8990FE1FC80C9E00639560 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8990FD1FC80C9E00639560 /* Assets.xcassets */; };
 		AF8991011FC80C9E00639560 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8990FF1FC80C9E00639560 /* Main.storyboard */; };
+		AF89910C1FC8124900639560 /* json_swift.txt in Resources */ = {isa = PBXBuildFile; fileRef = AF89910A1FC8124900639560 /* json_swift.txt */; };
+		AF89910D1FC8124900639560 /* oneModel_swift.txt in Resources */ = {isa = PBXBuildFile; fileRef = AF89910B1FC8124900639560 /* oneModel_swift.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,8 @@
 		AF8991001FC80C9E00639560 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AF8991021FC80C9E00639560 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF8991031FC80C9E00639560 /* AutomacticCoderSwift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AutomacticCoderSwift.entitlements; sourceTree = "<group>"; };
+		AF89910A1FC8124900639560 /* json_swift.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_swift.txt; sourceTree = "<group>"; };
+		AF89910B1FC8124900639560 /* oneModel_swift.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = oneModel_swift.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,7 @@
 		AF8990F81FC80C9E00639560 /* AutomacticCoderSwift */ = {
 			isa = PBXGroup;
 			children = (
+				AF8991091FC810FA00639560 /* r */,
 				AF8990F91FC80C9E00639560 /* AppDelegate.swift */,
 				AF8990FB1FC80C9E00639560 /* ViewController.swift */,
 				AF8990FD1FC80C9E00639560 /* Assets.xcassets */,
@@ -61,6 +66,15 @@
 				AF8991031FC80C9E00639560 /* AutomacticCoderSwift.entitlements */,
 			);
 			path = AutomacticCoderSwift;
+			sourceTree = "<group>";
+		};
+		AF8991091FC810FA00639560 /* r */ = {
+			isa = PBXGroup;
+			children = (
+				AF89910A1FC8124900639560 /* json_swift.txt */,
+				AF89910B1FC8124900639560 /* oneModel_swift.txt */,
+			);
+			path = r;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +110,11 @@
 					AF8990F51FC80C9E00639560 = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -122,8 +141,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF89910C1FC8124900639560 /* json_swift.txt in Resources */,
 				AF8990FE1FC80C9E00639560 /* Assets.xcassets in Resources */,
 				AF8991011FC80C9E00639560 /* Main.storyboard in Resources */,
+				AF89910D1FC8124900639560 /* oneModel_swift.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
