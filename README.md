@@ -5,9 +5,10 @@ ___
 在此版基础上修改
 #AutomaticCoder(HandyJSON版)
 ___
-需要导入
+###需要导入
+```
 pod 'HandyJSON'
-
+```
 ## 2017-11-29 ##
 
 ### 1.自动解析json，配合HandyJSON,不能有重复名字key.
