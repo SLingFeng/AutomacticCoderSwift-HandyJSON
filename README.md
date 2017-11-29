@@ -1,11 +1,11 @@
 # AutomacticCoderSwift-HandyJSON
 
 #AutomaticCoder(修改版) [https://github.com/yinxianwei/AutomaticCoder-](https://github.com/yinxianwei/AutomaticCoder-)
-___
+--
 在此版基础上修改
 #AutomaticCoder(HandyJSON版)
-___
-###需要导入
+--
+##需要导入
 ```
 pod 'HandyJSON'
 ```
