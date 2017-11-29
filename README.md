@@ -11,5 +11,5 @@ pod 'HandyJSON'
 ```
 ## 2017-11-29 ##
 
-> 1.自动解析json，配合HandyJSON,不能有重复名字key.
- 2.解析成一个模型文件。
+> 1.自动解析json，配合HandyJSON,不能有重复名字key.\n
+> 2.解析成一个模型文件。
