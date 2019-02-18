@@ -72,19 +72,25 @@ class ViewController: NSViewController {
                 weakSelf?.writeToFile()
             })
             
+        }else {
+             self.message("JSON格式不正确！", "")
         }
     }
     
     
     func message(_ str : String, _ str2 :String) -> Void {
-        let string = str2.copy()
-        self.jsonTV.string = str;
-        self.jsonTV.textColor = .red
-        self.jsonTV.font = NSFont.systemFont(ofSize: 50)
-        self.sBtn.isEnabled = false
         
-        
-        self.perform(#selector(self.normal), with: string, afterDelay: 1)
+        let alert = NSAlert()
+        alert.messageText = str
+        alert.runModal()
+//        let string = str2.copy()
+//        self.jsonTV.string = str;
+//        self.jsonTV.textColor = .red
+//        self.jsonTV.font = NSFont.systemFont(ofSize: 50)
+//        self.sBtn.isEnabled = false
+//
+//
+//        self.perform(#selector(self.normal), with: string, afterDelay: 1)
     }
     
     @objc func normal(_ str : String) -> Void {
@@ -122,22 +128,28 @@ class ViewController: NSViewController {
                 break
                 
             case .kNumber:
-                property.append("var \(key) = \(typeName(type))())\n\n    ")
+                property.append("var \(key) = \(typeName(type))()\n\n    ")
                 break
                 
             case .kArray:
-                property.append("var \(key) : [\(prefix)\(uppercaseFirstChar(key))Model]\n\n    ")
-                let arr = json[key] as! NSArray
-                if arr.count != 0 {
+                if self.isDataArray(json[key] as! [Dictionary<String, Any>]) {
+                    let arr = json[key] as! NSArray
+                    property.append("var \(key) : [\(prefix)\(uppercaseFirstChar(key))Model]\n\n    ")
                     self.generateClass(uppercaseFirstChar(key), arr.object(at: 0) as! Dictionary<NSString, Any>)
                 }
+                
+//
+//                if arr.count != 0 {
+//
+//                }
                 break
                 
             case .kDictionary:
                 property.append("var \(key) : \(prefix)\(uppercaseFirstChar(key))Model?\n\n    ")
-                let arr = json[key] as! NSArray
-                if arr.count != 0 {
-                    self.generateClass(uppercaseFirstChar(key), arr.object(at: 0) as! Dictionary<NSString, Any>)
+                if let arr: NSArray = json[key] as? NSArray {
+                    if arr.count != 0 {
+                        self.generateClass(uppercaseFirstChar(key), arr.object(at: 0) as! Dictionary<NSString, Any>)
+                    }
                 }
                 break
                 
@@ -203,31 +215,30 @@ class ViewController: NSViewController {
 //            print("文件创建结果: \(createSuccess)")
 //        }
 //    }
-    
-    func isDataArray(_ theArray: [Any]) -> Bool {
+    func isDataArray(_ theArray: [Dictionary<String, Any>]) -> Bool {
         if theArray.count <= 0 {
             return false
         }
-        
+
         for item: Any in theArray {
             if self.type(item) != JsonValueType.kDictionary {
                 return false
             }
         }
-        
+
         let keys = NSMutableSet()
         let tempDic = theArray[0]
-        for key: String in tempDic as! Dictionary<String, Any>.Keys {
+        for key: String in tempDic.keys {
             keys.add(key)
         }
-        
-        for item: Any in theArray {
+
+        for item: Dictionary in theArray {
             let newKeys = NSMutableSet()
-            
-            for key: String in item as! Dictionary<String, Any>.Keys {
+
+            for key: String in item.keys {
                 newKeys.add(key)
             }
-            
+
             if keys.isEqual(to: newKeys) == false {
                 return false
             }
