@@ -255,8 +255,8 @@ class ViewController: NSViewController {
             return JsonValueType.kArray
         }else if obj is [AnyHashable: Any] {
             return JsonValueType.kDictionary
-        }else if obj is NSNumber {
-            return JsonValueType.kNumber
+//        }else if obj is NSNumber {
+//            return JsonValueType.kNumber
         }else {
             return JsonValueType.kString
         }
@@ -280,7 +280,7 @@ class ViewController: NSViewController {
     func typeName(_ type: JsonValueType) -> String {
         switch type {
         case .kString:
-            return "NSString"
+            return "String"
             
         case .kNumber:
             return "NSNumber"
