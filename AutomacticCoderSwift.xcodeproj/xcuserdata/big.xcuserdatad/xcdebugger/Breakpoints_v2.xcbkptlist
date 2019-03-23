@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutomacticCoderSwift/ViewController.swift"
-            timestampString = "572171663.1617841"
+            timestampString = "575017179.04822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "generateClass(_:_:)"
             landmarkType = "7">
          </BreakpointContent>

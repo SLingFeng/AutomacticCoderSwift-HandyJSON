@@ -68,7 +68,7 @@ class ViewController: NSViewController {
                 }
                 weakSelf?._path = panel.url?.path
                 
-                weakSelf?.generateClass((weakSelf?.classNameTF.stringValue)!, dict as! Dictionary<NSString, Any>)
+                weakSelf?.generateClass((weakSelf?.classNameTF.stringValue)!, dict! as NSDictionary)
                 weakSelf?.writeToFile()
             })
             
@@ -101,7 +101,7 @@ class ViewController: NSViewController {
     }
     
     
-    func generateClass(_ nameTemp: String, _ json: Dictionary<NSString, Any>) -> Void {
+    func generateClass(_ nameTemp: String, _ json: NSDictionary) -> Void {
         
         let templateModelSwift = NSMutableString(string: try! String(contentsOfFile: Bundle.main.path(forResource: "oneModel_swift", ofType: "txt") ?? "", encoding: .utf8))
         
@@ -117,25 +117,31 @@ class ViewController: NSViewController {
             name = "\(name)Model"
         }
         
-        for key: NSString in json.keys {
+//        for key: NSString in json.keys {
+        for i in 0..<json.count {
+            let key = json.allKeys[i] as! NSString
             print(key)
+            let v = json[key]
+            print(v)
             
             let type = self.type(json[key] as Any) as JsonValueType
             
             switch (type) {
             case .kString, .kBool:
-                property.append("var \(key) : \(typeName(type))?\n\n    ")
+                property.append("///\(String(describing: v))\n    ")
+                property.append("var \(key) : \(typeName(type)) = \"\"\n\n    ")
                 break
                 
             case .kNumber:
+                property.append("///\(String(describing: v))\n    ")
                 property.append("var \(key) = \(typeName(type))()\n\n    ")
                 break
                 
             case .kArray:
                 if self.isDataArray(json[key] as! [Dictionary<String, Any>]) {
                     let arr = json[key] as! NSArray
-                    property.append("var \(key) : [\(prefix)\(uppercaseFirstChar(key))Model]\n\n    ")
-                    self.generateClass(uppercaseFirstChar(key), arr.object(at: 0) as! Dictionary<NSString, Any>)
+                    property.append("var \(key) : [\(prefix)\(uppercaseFirstChar(key))Model] = []\n\n    ")
+                    self.generateClass(uppercaseFirstChar(key), arr.object(at: 0) as! NSDictionary)
                 }
                 
 //
@@ -148,7 +154,7 @@ class ViewController: NSViewController {
                 property.append("var \(key) : \(prefix)\(uppercaseFirstChar(key))Model?\n\n    ")
                 if let arr: NSArray = json[key] as? NSArray {
                     if arr.count != 0 {
-                        self.generateClass(uppercaseFirstChar(key), arr.object(at: 0) as! Dictionary<NSString, Any>)
+                        self.generateClass(uppercaseFirstChar(key), arr.object(at: 0)  as! NSDictionary)
                     }
                 }
                 break
