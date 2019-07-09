@@ -21,7 +21,7 @@ class ViewController: NSViewController {
 
     
 //    var _templateSwift = NSMutableString(contentsOfFile: Bundle.main.path(forResource: "json_swift", ofType: "txt")!, encoding: NSUTF8StringEncoding.rawValue)
-    var _templateSwift : NSMutableString?
+    var _templateSwift = NSMutableString()
     
     var _path : String?
     
@@ -116,21 +116,26 @@ class ViewController: NSViewController {
         }else {
             name = "\(name)Model"
         }
-        
+        NSLog("name:%@, prefix:%@", name, prefix)
 //        for key: NSString in json.keys {
         for i in 0..<json.count {
             let key = json.allKeys[i] as! NSString
             print(key)
             let v = json[key]
-            print(v)
+//            print(v)
             
             let type = self.type(json[key] as Any) as JsonValueType
             
             switch (type) {
-            case .kString, .kBool:
+            case .kString:
                 property.append("///\(String(describing: v))\n    ")
                 property.append("var \(key) : \(typeName(type)) = \"\"\n\n    ")
                 break
+                
+//            case .kBool:
+//                property.append("///\(String(describing: v))\n    ")
+//                property.append("var \(key) : \(typeName(type)) = false\n\n    ")
+//                break
                 
             case .kNumber:
                 property.append("///\(String(describing: v))\n    ")
@@ -152,14 +157,16 @@ class ViewController: NSViewController {
                 
             case .kDictionary:
                 property.append("var \(key) : \(prefix)\(uppercaseFirstChar(key))Model?\n\n    ")
-                if let arr: NSArray = json[key] as? NSArray {
-                    if arr.count != 0 {
-                        self.generateClass(uppercaseFirstChar(key), arr.object(at: 0)  as! NSDictionary)
+                if let dic: NSDictionary = json[key] as? NSDictionary {
+                    if dic.count != 0 {
+                        self.generateClass(uppercaseFirstChar(key), dic)
                     }
                 }
                 break
                 
             default:
+                property.append("///\(String(describing: v))\n    ")
+                property.append("var \(key) : \(typeName(type)) = \"\"\n\n    ")
                 break
             }
         }
@@ -169,19 +176,19 @@ class ViewController: NSViewController {
         templateModelSwift.replaceOccurrences(of: "#property#", with: property as String, options: .caseInsensitive, range: NSRange(location: 0, length: templateModelSwift.length))
         
         //写文件
-        _templateSwift?.append(templateModelSwift as String)
+        _templateSwift.append(templateModelSwift as String)
     }
     
     func writeToFile() {
-        _templateSwift?.replaceOccurrences(of: "#name#", with: "\(self.classNameTF.stringValue)Model", options: .caseInsensitive, range: NSRange(location: 0, length: (self.classNameTF.stringValue as NSString).length))
+        _templateSwift.replaceOccurrences(of: "#name#", with: "\(self.classNameTF.stringValue)Model", options: .caseInsensitive, range: NSRange(location: 0, length: (self.classNameTF.stringValue as NSString).length))
 
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
-        _templateSwift?.replaceOccurrences(of: "#time#", with: formatter.string(from: Date()), options: .caseInsensitive, range: NSRange(location: 0, length: (_templateSwift?.length)!))
+        _templateSwift.replaceOccurrences(of: "#time#", with: formatter.string(from: Date()), options: .caseInsensitive, range: NSRange(location: 0, length: _templateSwift.length))
         
         do {
-            try _templateSwift?.write(toFile: "\(_path!)/\(self.classNameTF.stringValue)Model.swift", atomically: false, encoding: String.Encoding.utf8.rawValue)
+            try _templateSwift.write(toFile: "\(_path!)/\(self.classNameTF.stringValue)Model.swift", atomically: false, encoding: String.Encoding.utf8.rawValue)
 //            var data = Data()
 //            data.append((_templateSwift?.data(using: String.Encoding.utf8.rawValue))!)
 //            try data.write(to: URL(fileURLWithPath: "\(_path!)/\(self.classNameTF.stringValue)Model.swift"))
@@ -291,14 +298,14 @@ class ViewController: NSViewController {
         case .kNumber:
             return "NSNumber"
             
-        case .kBool:
-            return "Bool"
+//        case .kBool:
+//            return "Bool"
             
         case .kArray, .kDictionary:
             return ""
             
         default:
-            return ""
+            return "String"
 //            break
         }
     }
