@@ -143,16 +143,14 @@ class ViewController: NSViewController {
                 break
                 
             case .kArray:
-                if self.isDataArray(json[key] as! [Dictionary<String, Any>]) {
+                if self.isDataArray(json[key] as! [Any]) {
                     let arr = json[key] as! NSArray
                     property.append("var \(key) : [\(prefix)\(uppercaseFirstChar(key))Model] = []\n\n    ")
                     self.generateClass(uppercaseFirstChar(key), arr.object(at: 0) as! NSDictionary)
+                }else {
+                    property.append("var \(key) : [Any]?\n\n    ")
                 }
                 
-//
-//                if arr.count != 0 {
-//
-//                }
                 break
                 
             case .kDictionary:
@@ -228,7 +226,7 @@ class ViewController: NSViewController {
 //            print("文件创建结果: \(createSuccess)")
 //        }
 //    }
-    func isDataArray(_ theArray: [Dictionary<String, Any>]) -> Bool {
+    func isDataArray(_ theArray: [Any]) -> Bool {
         if theArray.count <= 0 {
             return false
         }
@@ -240,12 +238,13 @@ class ViewController: NSViewController {
         }
 
         let keys = NSMutableSet()
-        let tempDic = theArray[0]
+        let tempDic = theArray[0] as! Dictionary<String, Any>
         for key: String in tempDic.keys {
             keys.add(key)
         }
 
-        for item: Dictionary in theArray {
+        for i in 0..<theArray.count {
+            let item: Dictionary = theArray[i] as! Dictionary<String, Any>
             let newKeys = NSMutableSet()
 
             for key: String in item.keys {
