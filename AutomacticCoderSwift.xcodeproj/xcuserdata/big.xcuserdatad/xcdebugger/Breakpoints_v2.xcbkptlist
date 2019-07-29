@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AutomacticCoderSwift/ViewController.swift"
-            timestampString = "584849210.67538"
+            timestampString = "585727515.961519"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
             endingLineNumber = "178"
-            landmarkName = "generateClass(_:_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -27,13 +27,13 @@
             condition = "key == &quot;goal_new&quot;"
             continueAfterRunningActions = "No"
             filePath = "AutomacticCoderSwift/ViewController.swift"
-            timestampString = "584849210.680482"
+            timestampString = "585727515.962997"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "146"
             endingLineNumber = "146"
-            landmarkName = "generateClass(_:_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
